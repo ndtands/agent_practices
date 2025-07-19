@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/python-312
 
 # Set work directory
-WORKDIR /opt/app-root/
+WORKDIR /opt/app-root
 
 # Copy Python Project Files (Container context must be the `python` directory)
 COPY . /opt/app-root
@@ -17,6 +17,8 @@ RUN dnf -y update && dnf install -y gcc gcc-c++ \
 # UV_LINK_MODE=copy: Ensures files are copied, not symlinked, which can avoid issues
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy
+
+ENV PYTHONPATH=/opt/app-root
 
 # Install dependencies using uv sync.
 # --frozen: Ensures uv respects the uv.lock file
@@ -34,9 +36,9 @@ RUN --mount=type=cache,target=/.cache/uv \
 RUN chgrp -R root /opt/app-root/ && chmod -R g+rwx /opt/app-root/
 
 # Expose default port (change if needed)
-EXPOSE 9999
+EXPOSE 10000
 
 USER 1001
 
 # Run the agent
-CMD uv run . --host 0.0.0.0
+CMD uv run app --host 0.0.0.0

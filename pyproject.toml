@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "a2a-sdk>=0.2.12",
+    "langchain-openai>=0.3.28",
+    "langgraph>=0.5.3",
 ]
 
 [dependency-groups]

@@ -185,3 +185,22 @@ uv run test_client.py
 3. **Error Handling**:
    - Client có xử lý lỗi khi không thể lấy extended card
    - Server có basic error handling cho các request không hợp lệ
+
+**Flow của một request**:
+1. Client gửi request đến server (localhost:9999)
+2. Request được DefaultRequestHandler tiếp nhận
+3. Request được chuyển đến HelloWorldAgentExecutor
+4. Executor gọi HelloWorldAgent.invoke()
+5. Kết quả "Hello World" được wrap trong text message
+6. Message được đưa vào event queue
+7. Response được trả về cho client
+
+**Các điểm đáng chú ý**:
+1. **Authentication**: Hỗ trợ 2 loại users (public và authenticated) với các skills khác nhau
+2. **Streaming**: Agent có khả năng streaming (capabilities=AgentCapabilities(streaming=True))
+3. **Task Management**: Sử dụng InMemoryTaskStore để quản lý tasks
+4. **Async/Await**: Sử dụng async/await cho các operations bất đồng bộ
+5. **Event Queue**: Sử dụng event queue để quản lý và trả về responses
+6. **Error Handling**: Basic error handling với cancel operation
+
+Đây là một ví dụ đơn giản nhưng đầy đủ các thành phần cơ bản của một A2A agent. Nó có thể được sử dụng làm template để xây dựng các agent phức tạp hơn.
