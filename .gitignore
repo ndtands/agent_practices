@@ -1,0 +1,4 @@
+.venv
+.notebook
+.env
+__pycache__
