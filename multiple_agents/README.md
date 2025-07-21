@@ -219,26 +219,22 @@ Core Directives:
 
 1. **Setup Environment**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Unix
-   pip install -r requirements.txt
+   uv sync
    ```
 
-2. **Start MCP Servers**
+2. **Launch Agents**
    ```bash
-   python weather_agent/weather_mcp.py
-   python airbnb_agent/airbnb_mcp.py
+   cd weather_agent
+   uv run .
+
+   cd airbnb_agent
+   uv run .
    ```
 
-3. **Launch Agents**
+3. **Start Host Agent**
    ```bash
-   python weather_agent/__main__.py
-   python airbnb_agent/__main__.py
-   ```
-
-4. **Start Host Agent**
-   ```bash
-   python host_agent/__main__.py
+   cd host_agent
+   uv run .
    ```
 
 ## Contributing
